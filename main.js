@@ -1,5 +1,4 @@
-// Meal Arrays:
-
+// Meal Arrays: Data Model
 var side = [
 "Miso Glazed Carrots",
 "Coleslaw",
@@ -60,6 +59,11 @@ var selectSide = document.querySelector('#side');
 var selectMainDish = document.querySelector('#main-dish');
 var selectDessert = document.querySelector('#dessert');
 var letsCookButton = document.querySelector('#lets-cook');
+var sideOutputDisplay = document.querySelector('.side-output');
+var mainOutputDisplay = document.querySelector('.main-output');
+var dessertOutputDisplay = document.querySelector('.dessert-output');
+var image = document.querySelector('.cook-pot');
+var outputSection = document.querySelector('.output-section');
 
 //Event Listeners
 letsCookButton.addEventListener('click', generateRandomMeal);
@@ -69,9 +73,40 @@ function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 };
 
-// generate random side, main, dessert depending on what radio button is selected.
-// crockpot image should disappear as the selected meal appears in the box, (show/hide)
 
-generateRandomMeal() {
-  
-}
+function generateRandomMeal(event) {
+  event.preventDefault();
+    newSide = side[getRandomIndex(side)];
+    newMainDish = mainDish[getRandomIndex(mainDish)];
+    newDessert = dessert[getRandomIndex(dessert)];
+
+      if (selectSide.checked === true) {
+        sideOutputDisplay.innerText = `${newSide}`;
+      } else if (selectMainDish.checked === true) {
+        mainOutputDisplay.innerText = `${newMainDish}`;
+      } else if (selectDessert.checked === true) {
+          dessertOutputDisplay.innerText = `${newDessert}`;
+        }
+
+    showOutputSection();
+};
+
+
+function show(element) {
+  element.classList.remove('hidden');
+};
+
+function hide(element) {
+  element.classList.add('hidden');
+};
+
+
+function showOutputSection() {
+  hide(image);
+  //show(outputSection);
+  show(sideOutputDisplay);
+  show(mainOutputDisplay);
+  show(dessertOutputDisplay);
+  // .innerText = "";
+  // .value = "";
+};
