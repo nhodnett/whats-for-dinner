@@ -74,17 +74,17 @@ function getRandomIndex(array) {
 };
 
 
-generateRandomMeal(event) {
+function generateRandomMeal(event) {
   event.preventDefault();
     newSide = side[getRandomIndex(side)];
     newMainDish = mainDish[getRandomIndex(mainDish)];
     newDessert = dessert[getRandomIndex(dessert)];
 
-      if (newSide.checked === true) {
+      if (selectSide.checked === true) {
         sideOutputDisplay.innerText = `${newSide}`;
-      } else if (newMainDish.checked === true) {
+      } else if (selectMainDish.checked === true) {
         mainOutputDisplay.innerText = `${newMainDish}`;
-        } else if (newDessert.checked === true) {
+      } else if (selectDessert.checked === true) {
           dessertOutputDisplay.innerText = `${newDessert}`;
         }
 
@@ -103,7 +103,10 @@ function hide(element) {
 
 function showOutputSection() {
   hide(image);
-  show(outputSection);
+  //show(outputSection);
+  show(sideOutputDisplay);
+  show(mainOutputDisplay);
+  show(dessertOutputDisplay);
   // .innerText = "";
   // .value = "";
 };
