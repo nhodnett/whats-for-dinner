@@ -58,12 +58,10 @@ var newDessert;
 var selectSide = document.querySelector('#side');
 var selectMainDish = document.querySelector('#main-dish');
 var selectDessert = document.querySelector('#dessert');
+var selectEntireMeal = document.querySelector('#entire-meal');
 var letsCookButton = document.querySelector('#lets-cook');
 var foodOutputDisplay = document.querySelector('.food-output');
-// var mainOutputDisplay = document.querySelector('.main-output');
-// var dessertOutputDisplay = document.querySelector('.dessert-output');
 var image = document.querySelector('.cook-pot');
-//var outputSection = document.querySelector('.output-section');
 var outputHeader = document.querySelector('.output-header');
 
 //Event Listeners
@@ -74,7 +72,6 @@ function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 };
 
-
 function generateRandomMeal(event) {
     clearOutputSection();
   event.preventDefault();
@@ -82,17 +79,18 @@ function generateRandomMeal(event) {
     newMainDish = mainDish[getRandomIndex(mainDish)];
     newDessert = dessert[getRandomIndex(dessert)];
 
-      if (selectSide.checked === true) {
+      if (selectSide.checked) {
         foodOutputDisplay.innerText = `${newSide}`;
-      } else if (selectMainDish.checked === true) {
+      } else if (selectMainDish.checked) {
         foodOutputDisplay.innerText = `${newMainDish}`;
-      } else if (selectDessert.checked === true) {
+      } else if (selectDessert.checked) {
           foodOutputDisplay.innerText = `${newDessert}`;
-        }
+      } else if (selectEntireMeal.checked) {
+          foodOutputDisplay.innerText = `${newMainDish} with a side of ${newSide} and ${newDessert} for dessert!`
+      }
 
     showOutputSection();
 };
-
 
 function show(element) {
   element.classList.remove('hidden');
@@ -102,19 +100,13 @@ function hide(element) {
   element.classList.add('hidden');
 };
 
-
 function showOutputSection() {
   hide(image);
   show(outputHeader);
-  //show(youShouldMake);
   show(foodOutputDisplay);
-  // show(mainOutputDisplay);
-  // show(dessertOutputDisplay);
 };
 
 function clearOutputSection() {
   foodOutputDisplay.innerText = "";
-  // mainOutputDisplay.innerText = "";
-  // dessertOutputDisplay.innerText = "";
   // .value = "";
 };
