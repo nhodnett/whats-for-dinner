@@ -6,7 +6,7 @@ var side = [
 "Crispy Potatoes",
 "Sweet Potato Tots",
 "Coconut Rice",
-"Caeser Salad",
+"Caesar Salad",
 "Shrimp Summer Rolls",
 "Garlic Butter Mushrooms",
 "Hush Puppies"
@@ -18,7 +18,7 @@ var mainDish = [
 "Shakshuka",
 "Thai Yellow Curry",
 "Bibimbap",
-"Chicken Parmesean",
+"Chicken Parmesan",
 "Butternut Squash Soup",
 "BBQ Chicken Burgers",
 "Ramen",
@@ -59,11 +59,12 @@ var selectSide = document.querySelector('#side');
 var selectMainDish = document.querySelector('#main-dish');
 var selectDessert = document.querySelector('#dessert');
 var letsCookButton = document.querySelector('#lets-cook');
-var sideOutputDisplay = document.querySelector('.side-output');
-var mainOutputDisplay = document.querySelector('.main-output');
-var dessertOutputDisplay = document.querySelector('.dessert-output');
+var foodOutputDisplay = document.querySelector('.food-output');
+// var mainOutputDisplay = document.querySelector('.main-output');
+// var dessertOutputDisplay = document.querySelector('.dessert-output');
 var image = document.querySelector('.cook-pot');
-var outputSection = document.querySelector('.output-section');
+//var outputSection = document.querySelector('.output-section');
+var outputHeader = document.querySelector('.output-header');
 
 //Event Listeners
 letsCookButton.addEventListener('click', generateRandomMeal);
@@ -75,17 +76,18 @@ function getRandomIndex(array) {
 
 
 function generateRandomMeal(event) {
+    clearOutputSection();
   event.preventDefault();
     newSide = side[getRandomIndex(side)];
     newMainDish = mainDish[getRandomIndex(mainDish)];
     newDessert = dessert[getRandomIndex(dessert)];
 
       if (selectSide.checked === true) {
-        sideOutputDisplay.innerText = `${newSide}`;
+        foodOutputDisplay.innerText = `${newSide}`;
       } else if (selectMainDish.checked === true) {
-        mainOutputDisplay.innerText = `${newMainDish}`;
+        foodOutputDisplay.innerText = `${newMainDish}`;
       } else if (selectDessert.checked === true) {
-          dessertOutputDisplay.innerText = `${newDessert}`;
+          foodOutputDisplay.innerText = `${newDessert}`;
         }
 
     showOutputSection();
@@ -103,10 +105,16 @@ function hide(element) {
 
 function showOutputSection() {
   hide(image);
-  //show(outputSection);
-  show(sideOutputDisplay);
-  show(mainOutputDisplay);
-  show(dessertOutputDisplay);
-  // .innerText = "";
+  show(outputHeader);
+  //show(youShouldMake);
+  show(foodOutputDisplay);
+  // show(mainOutputDisplay);
+  // show(dessertOutputDisplay);
+};
+
+function clearOutputSection() {
+  foodOutputDisplay.innerText = "";
+  // mainOutputDisplay.innerText = "";
+  // dessertOutputDisplay.innerText = "";
   // .value = "";
 };
