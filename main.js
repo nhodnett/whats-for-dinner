@@ -61,7 +61,7 @@ var outputHeader = document.querySelector('.output-header');
 
 //Event Listeners
 letsCookButton.addEventListener('click', generateRandomMeal);
-
+letsCookButton.addEventListener('click', handleError);
 //Functions
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
@@ -91,6 +91,16 @@ function letsCook(newSide, newMainDish, newDessert) {
   showOutputSection();
 };
 
+function handleError() {
+  if (!selectSide.checked && !selectMainDish.checked && !selectDessert.checked && !selectEntireMeal.checked) {
+    letsCookButton.innerText = `SELECT MEAL!`;
+      hideOutputSection();
+  } else {
+      letsCookButton.innerText = `LETS COOK!`;
+        showOutputSection();
+  }
+};
+
 function show(element) {
   element.classList.remove('hidden');
 };
@@ -104,6 +114,12 @@ function showOutputSection() {
   show(outputHeader);
   show(foodOutputDisplay);
 };
+
+function hideOutputSection() {
+  show(image);
+  hide(outputHeader);
+  hide(foodOutputDisplay);
+}
 
 function clearOutputSection() {
   foodOutputDisplay.innerText = "";
