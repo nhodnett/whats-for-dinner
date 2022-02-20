@@ -49,11 +49,6 @@ var dessert = [
 "Eclairs"
 ];
 
-//Global variables
-var newSide;
-var newMainDish;
-var newDessert;
-
 //Query Selectors
 var selectSide = document.querySelector('#side');
 var selectMainDish = document.querySelector('#main-dish');
@@ -75,10 +70,14 @@ function getRandomIndex(array) {
 function generateRandomMeal(event) {
     clearOutputSection();
   event.preventDefault();
-    newSide = side[getRandomIndex(side)];
-    newMainDish = mainDish[getRandomIndex(mainDish)];
-    newDessert = dessert[getRandomIndex(dessert)];
+    var newSide = side[getRandomIndex(side)];
+    var newMainDish = mainDish[getRandomIndex(mainDish)];
+    var newDessert = dessert[getRandomIndex(dessert)];
 
+  letsCook(newSide, newMainDish, newDessert);
+};
+
+function letsCook(newSide, newMainDish, newDessert) {
       if (selectSide.checked) {
         foodOutputDisplay.innerText = `${newSide}`;
       } else if (selectMainDish.checked) {
@@ -89,7 +88,7 @@ function generateRandomMeal(event) {
           foodOutputDisplay.innerText = `${newMainDish} with a side of ${newSide} and ${newDessert} for dessert!`
       }
 
-    showOutputSection();
+  showOutputSection();
 };
 
 function show(element) {
