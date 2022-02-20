@@ -54,13 +54,18 @@ var selectSide = document.querySelector('#side');
 var selectMainDish = document.querySelector('#main-dish');
 var selectDessert = document.querySelector('#dessert');
 var selectEntireMeal = document.querySelector('#entire-meal');
+
 var letsCookButton = document.querySelector('#lets-cook');
+var clearMessageButton = document.querySelector('.clear-button');
+
 var foodOutputDisplay = document.querySelector('.food-output');
 var image = document.querySelector('.cook-pot');
 var outputHeader = document.querySelector('.output-header');
 
 //Event Listeners
 letsCookButton.addEventListener('click', generateRandomMeal);
+letsCookButton.addEventListener('click', handleError);
+clearMessageButton.addEventListener('click', clearMessage);
 
 //Functions
 function getRandomIndex(array) {
@@ -69,26 +74,42 @@ function getRandomIndex(array) {
 
 function generateRandomMeal(event) {
     clearOutputSection();
-  event.preventDefault();
-    var newSide = side[getRandomIndex(side)];
-    var newMainDish = mainDish[getRandomIndex(mainDish)];
-    var newDessert = dessert[getRandomIndex(dessert)];
+      event.preventDefault();
+        var newSide = side[getRandomIndex(side)];
+          var newMainDish = mainDish[getRandomIndex(mainDish)];
+            var newDessert = dessert[getRandomIndex(dessert)];
 
-  letsCook(newSide, newMainDish, newDessert);
+              letsCook(newSide, newMainDish, newDessert);
 };
 
 function letsCook(newSide, newMainDish, newDessert) {
       if (selectSide.checked) {
         foodOutputDisplay.innerText = `${newSide}`;
       } else if (selectMainDish.checked) {
-        foodOutputDisplay.innerText = `${newMainDish}`;
-      } else if (selectDessert.checked) {
-          foodOutputDisplay.innerText = `${newDessert}`;
-      } else if (selectEntireMeal.checked) {
-          foodOutputDisplay.innerText = `${newMainDish} with a side of ${newSide} and ${newDessert} for dessert!`
+          foodOutputDisplay.innerText = `${newMainDish}`;
+        } else if (selectDessert.checked) {
+            foodOutputDisplay.innerText = `${newDessert}`;
+          } else if (selectEntireMeal.checked) {
+              foodOutputDisplay.innerText = `${newMainDish} with a side of ${newSide} and ${newDessert} for dessert!`
       }
+                showOutputSection();
+};
 
-  showOutputSection();
+function handleError() {
+  if (!selectSide.checked && !selectMainDish.checked && !selectDessert.checked && !selectEntireMeal.checked) {
+    letsCookButton.innerText = 'SELECT MEAL!';
+      hideOutputSection();
+  } else {
+      letsCookButton.innerText = 'LETS COOK!';
+        showOutputSection();
+    }
+};
+
+function clearMessage() {
+  if (foodOutputDisplay === true) {
+    foodOutputDisplay = '';
+  }
+      hideOutputSection();
 };
 
 function show(element) {
@@ -101,11 +122,16 @@ function hide(element) {
 
 function showOutputSection() {
   hide(image);
-  show(outputHeader);
-  show(foodOutputDisplay);
+    show(outputHeader);
+      show(foodOutputDisplay);
+};
+
+function hideOutputSection() {
+  show(image);
+    hide(outputHeader);
+      hide(foodOutputDisplay);
 };
 
 function clearOutputSection() {
   foodOutputDisplay.innerText = "";
-  // .value = "";
 };
